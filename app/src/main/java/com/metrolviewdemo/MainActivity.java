@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.android.MetroLayout;
 import com.google.gson.Gson;
@@ -16,10 +17,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final int ITEM_MAX = -2;
-    public static final int ITEM_MID = -1;
-    public static final int ITEM_MIN = 0;
     private MetroLayout mMvHome;
+    private HomeMetroAdapter mAdapter;
     private String mJsonStr = "{\n" +
             "    \"data\": [\n" +
             "        {\n" +
@@ -156,7 +155,14 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        mMvHome = findViewById(R.id.mv_home);
+        mMvHome = findViewById(R.id.home_metro);
+        mMvHome.setItemClickListener(new MetroLayout.OnItemClickListener() {
+            @Override
+            public void itemClick(int position) {
+                Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_LONG).show();
+                mAdapter.notifyDataSetChanged();
+            }
+        });
         getHomeMenuList();
     }
 
@@ -168,9 +174,11 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(mJsonStr);
             String jsonData = jsonObject.getString("data");
             Gson gson = new Gson();
-            Type type = new TypeToken<List<HomeMetroModel>>() {}.getType();
+            Type type = new TypeToken<List<HomeMetroModel>>() {
+            }.getType();
             List<HomeMetroModel> list = gson.fromJson(jsonData, type);
-            mMvHome.setAdapter(new HomeMetroAdapter(new HomeMetroTypeConvers(list)));
+            mAdapter = new HomeMetroAdapter(new HomeMetroTypeConvers(list));
+            mMvHome.setAdapter(mAdapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -75,11 +75,11 @@ public abstract class BaseMetroAdapter<T> extends BaseAdapter {
         convertView = bindViewHolder()
                 .bindViewType(type)
                 .bindView(parent.getContext(), model, parent)
+                .bindViewAnimation(position)
                 .bindData(model);
         convertView.setTag(type);
         return convertView;
     }
-
 
     public abstract BaseViewHolder<T> bindViewHolder();
 

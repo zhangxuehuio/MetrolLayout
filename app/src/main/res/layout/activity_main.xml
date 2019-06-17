@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context=".MainActivity">
-    <!--1111*396-->
+
     <com.android.MetroLayout
-        android:id="@+id/mv_home"
-        android:layout_width="555dp"
-        android:layout_height="198dp"
+        android:id="@+id/home_metro"
+        android:layout_width="1712dp"
+        android:layout_height="667dp"
+        android:layout_centerHorizontal="true"
         app:HorizontalGridCount="7"
-        app:ItemDividerSpace="10dp"
-        app:VerticalGridCount="3" />
+        app:VerticalGridCount="3"
+        app:ItemDividerSpace="17dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginBottom="17dp" />
 
 </RelativeLayout>

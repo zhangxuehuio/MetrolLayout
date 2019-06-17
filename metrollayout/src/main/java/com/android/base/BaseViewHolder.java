@@ -20,6 +20,8 @@ public abstract class BaseViewHolder<T> {
 
     protected abstract View bindData(T model);
 
+    protected abstract BaseViewHolder<T> bindViewAnimation(int position);
+
     protected BaseViewHolder<T> bindViewType(MetroType metroType) {
         this.mViewType = metroType;
         return this;
@@ -64,6 +66,14 @@ public abstract class BaseViewHolder<T> {
         return this;
     }
 
+    public BaseViewHolder<T> setImageUrlForCallback(@IdRes int resId, OnImageLoaderListener listener) {
+        ImageView view = getView(resId);
+        if (view != null && listener != null) {
+            listener.onImagerLoader(view);
+        }
+        return this;
+    }
+
 
     private <V extends View> V getView(@IdRes int resId) {
         V v = null;
@@ -71,5 +81,9 @@ public abstract class BaseViewHolder<T> {
             v = mRootView.findViewById(resId);
         }
         return v;
+    }
+
+    public interface OnImageLoaderListener {
+        void onImagerLoader(ImageView view);
     }
 }

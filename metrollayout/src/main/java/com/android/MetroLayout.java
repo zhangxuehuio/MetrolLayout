@@ -50,7 +50,6 @@ public class MetroLayout extends ViewGroup {
     private void measureChildSize(ViewGroup parent, int widthMeasureSpec, int heightMeasureSpec) {
         int parentWith = MeasureSpec.getSize(widthMeasureSpec);
         int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-        Log.e("zxh", " px2dp ==> 10px = " + DensityUtil.px2dip(this.getContext(), 10));
 //        Log.e("zxh", "measureChildSize    parentWith=" + parentWith + "    parentHeight=" + parentHeight);
         int totalHorizontalDividerSpace = mItemDividerSpace * (mHorizontalGridCount - 1);
         int totalVerticalDividerSpace = mItemDividerSpace * (mVerticalGridCount - 1);
